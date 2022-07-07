@@ -1,6 +1,6 @@
 {
   "author": "Eric MORAND <eric.morand@gmail.com>",
-  "name": "twing",
+  "name": "@ofabel/twing",
   "description": "First-class Twig engine for Node.js",
   "keywords": [
     "browser",
@@ -10,14 +10,15 @@
     "twig-engine",
     "typescript"
   ],
-  "version": "5.1.3",
+  "version": "5.1.4",
   "homepage": "http://NightlyCommit.github.io/twing",
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/nightlycommit/twing"
+    "url": "https://github.com/ofabel/twing"
   },
   "main": "dist/cjs/main.js",
+  "private": false,
   "browser": "dist/es/browser.js",
   "module": "dist/es",
   "types": "dist/types/main.d.ts",
@@ -26,7 +27,7 @@
   },
   "scripts": {
     "precover": "rimraf coverage .nyc_output",
-    "prepare": "rimraf dist && npm run build && replace-in-file '__VERSION__' $npm_package_version 'dist/**' --verbose && npm run bundle",
+    "prepack": "rimraf dist && npm run build && replace-in-file '__VERSION__' $npm_package_version 'dist/**' --verbose && npm run bundle",
     "test": "npm run test:unit && npm run test:integration",
     "test:integration": "ts-node node_modules/tape/bin/tape 'test/tests/integration/test.ts' | tap-spec",
     "test:unit": "ts-node node_modules/tape/bin/tape 'test/tests/unit/**/test.ts' | tap-spec",

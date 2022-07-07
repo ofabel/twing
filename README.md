@@ -1,5 +1,5 @@
 # Twing
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![Donate][donate-image]][donate-url]
+[![NPM version][npm-image]][npm-url] [![Donate][donate-image]][donate-url]
 
 First-class Twig engine for Node.js
 
@@ -100,13 +100,12 @@ Read the [documentation](http://NightlyCommit.github.io/twing) for more informat
 
 ## License
 
-Copyright © 2018 [Eric MORAND](https://github.com/ericmorand). Released under the [2-Clause BSD License](https://github.com/ericmorand/twing/blob/master/LICENSE).
+Copyright © 2018 [Eric MORAND](https://github.com/ericmorand). Released under
+the [2-Clause BSD License](https://gitlab.com/nightlycommit/twing/-/blob/main/LICENSE).
 
 [npm-image]: https://badge.fury.io/js/twing.svg
-[npm-url]: https://npmjs.org/package/twing
-[travis-image]: https://travis-ci.com/NightlyCommit/twing.svg?branch=master
-[travis-url]: https://travis-ci.com/NightlyCommit/twing
-[coveralls-image]: https://coveralls.io/repos/github/NightlyCommit/twing/badge.svg
-[coveralls-url]: https://coveralls.io/github/NightlyCommit/twing
+
+[npm-url]: https://npmjs.org/package/@bsicx/twing
+
 [donate-image]: https://img.shields.io/badge/Donate-PayPal-green.svg
 [donate-url]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7YZU3L2JL2KJA
