@@ -41,9 +41,7 @@ import {namePattern, Token, TokenType} from "twig-lexer";
 import {typeToEnglish} from "./lexer";
 import {TwingNodeExpressionFunction} from "./node/expression/function";
 import {TwingNodeExpressionFilter} from "./node/expression/filter";
-
-const sha256 = require('crypto-js/sha256');
-const hex = require('crypto-js/enc-hex');
+import {createHash} from "crypto";
 
 class TwingParserStackEntry {
     stream: TwingTokenStream;
@@ -110,7 +108,10 @@ export class TwingParser {
     }
 
     getVarName(prefix: string = '__internal_'): string {
-        return `${prefix}${hex.stringify(sha256('TwingParser::getVarName' + this.stream.getSourceContext().getCode() + this.varNameSalt++))}`;
+        let key: string = 'TwingParser::getVarName' + this.stream.getSourceContext().getCode() + this.varNameSalt++;
+        let suffix: string = createHash('sha256').update(key).digest('hex');
+
+        return `${prefix}${suffix}`;
     }
 
     parse(stream: TwingTokenStream, test: Array<any> = null, dropNeedle: boolean = false): TwingNodeModule {
@@ -1269,8 +1270,7 @@ export class TwingParser {
             }
 
             return function_.getExpressionFactory();
-        }
-        else {
+        } else {
             if (strict) {
                 let e = new TwingErrorSyntax(`Unknown "${name}" function.`, line, this.getStream().getSourceContext());
 

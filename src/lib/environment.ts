@@ -29,10 +29,9 @@ import {TwingSandboxSecurityPolicyInterface} from "./sandbox/security-policy-int
 import {TwingEnvironmentOptions} from "./environment-options";
 import {TwingSourceMapNodeFactory} from "./source-map/node-factory";
 import {TwingNodeType} from "./node-type";
+import {createHash} from "crypto";
 
 const path = require('path');
-const sha256 = require('crypto-js/sha256');
-const hex = require('crypto-js/enc-hex');
 
 export type TwingTemplateConstructor = new(e: TwingEnvironment) => TwingTemplate;
 export type TwingTemplatesModule = (T: typeof TwingTemplate) => Map<number, TwingTemplateConstructor>;
@@ -238,7 +237,7 @@ export abstract class TwingEnvironment extends EventEmitter {
         return this.getLoader().getCacheKey(name, from).then((key) => {
             key += this.optionsHash;
 
-            return hex.stringify(sha256(key)) + (index === 0 ? '' : '_' + index);
+            return createHash('sha256').update(key).digest('hex') + (index === 0 ? '' : '_' + index);
         });
     }
 
@@ -437,7 +436,7 @@ export abstract class TwingEnvironment extends EventEmitter {
      * @throws TwingErrorSyntax When an error occurred during compilation
      */
     createTemplate(template: string, name: string = null): Promise<TwingTemplate> {
-        let hash: string = hex.stringify(sha256(template));
+        let hash: string = createHash('sha256').update(template).digest('hex');
 
         if (name !== null) {
             name = `${name} (string template ${hash})`;

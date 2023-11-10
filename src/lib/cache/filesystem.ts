@@ -3,11 +3,9 @@ import {TwingTemplatesModule} from "../environment";
 import {stat, writeFile, rename, unlink} from "fs";
 import {dirname, join, resolve as resolvePath, extname} from "path";
 import {ensureDir} from "fs-extra";
+import {createHash} from "crypto";
 
 let {tmpName} = require('tmp');
-
-const sha256 = require('crypto-js/sha256');
-const hex = require('crypto-js/enc-hex');
 
 /**
  * Implements a cache on the filesystem.
@@ -25,7 +23,7 @@ export class TwingCacheFilesystem implements TwingCacheInterface {
     }
 
     generateKey(name: string, className: string): Promise<string> {
-        let hash: string = hex.stringify(sha256(className));
+        let hash: string = createHash('sha256').update(className).digest('hex');
 
         return Promise.resolve(join(
             this.directory,
